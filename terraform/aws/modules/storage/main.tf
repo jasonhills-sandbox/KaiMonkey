@@ -33,6 +33,7 @@ resource "aws_security_group" "km_rds_sg" {
 }
 
 resource "aws_kms_key" "km_db_kms_key" {
+  # Drata: Define [aws_kms_key.policy] to restrict access to your resource. Follow the principal of minimum necessary access, ensuring permissions are scoped to trusted entities. Exclude this finding if access to Keys is managed using IAM policies instead of a Key policy
   description             = "KMS Key for DB instance ${var.environment}"
   deletion_window_in_days = 10
   enable_key_rotation     = true
