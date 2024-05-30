@@ -3,6 +3,7 @@ resource "aws_db_subnet_group" "km_rds_subnet_grp" {
   subnet_ids = var.private_subnet
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_db_subnet_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_subnet_grp_${var.environment}"
   })
 }
