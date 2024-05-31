@@ -110,6 +110,7 @@ resource "aws_s3_bucket" "km_blob_storage" {
 }
 
 resource "aws_s3_bucket" "km_public_blob" {
+  # Drata: Set [s3.bucket.public_access_block_configuration] to true to prevent intentional or incidental public access. Exclude this finding if this configuration is set at the account level. Setting this field ensures bucket access is limited to AWS service principals and authorized users. Exclude this finding if this configuration is set at the account level
   bucket = "km-public-blob"
 }
 
