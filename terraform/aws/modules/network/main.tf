@@ -84,6 +84,7 @@ resource "aws_route_table" "km_route_table" {
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_route_table.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_route_table_${var.environment}"
   })
 }
