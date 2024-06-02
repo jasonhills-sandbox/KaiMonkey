@@ -36,6 +36,7 @@ resource "aws_iam_policy" "km_ssm_secrets_policy" {
   description = "Kai Monkey SSM Secrets Policy"
 
   policy = <<EOF
+  # Drata: Explicitly define resources for [aws_iam_policy.policy] in adherence with the principal of least privilege. Avoid the use of overly permissive allow-all access patterns such as ([*])
 {
     "Version": "2012-10-17",
     "Statement": [
