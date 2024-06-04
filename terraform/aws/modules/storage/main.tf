@@ -3,6 +3,7 @@ resource "aws_db_subnet_group" "km_rds_subnet_grp" {
   subnet_ids = var.private_subnet
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_db_subnet_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_subnet_grp_${var.environment}"
   })
 }
@@ -12,6 +13,7 @@ resource "aws_security_group" "km_rds_sg" {
   vpc_id = var.vpc_id
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_sg_${var.environment}"
   })
 
@@ -29,15 +31,19 @@ resource "aws_security_group" "km_rds_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  # Drata: Ensure that [aws_security_group.ingress.cidr_blocks] is explicitly defined and narrowly scoped to only allow traffic from trusted sources
+  # Drata: Ensure that [aws_security_group.egress.cidr_blocks] is explicitly defined and narrowly scoped to only allow traffic to trusted sources
   }
 }
 
 resource "aws_kms_key" "km_db_kms_key" {
+  # Drata: Define [aws_kms_key.policy] to restrict access to your resource. Follow the principal of minimum necessary access, ensuring permissions are scoped to trusted entities. Exclude this finding if access to Keys is managed using IAM policies instead of a Key policy
   description             = "KMS Key for DB instance ${var.environment}"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_kms_key.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_db_kms_key_${var.environment}"
   })
 }
@@ -105,11 +111,14 @@ resource "aws_s3_bucket" "km_blob_storage" {
   bucket = "km-blob-storage-${var.environment}"
   acl    = "private"
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
     name = "km_blob_storage_${var.environment}"
   })
 }
 
 resource "aws_s3_bucket" "km_public_blob" {
+  # Drata: Set [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
+  # Drata: Set [s3.bucket.public_access_block_configuration] to true to prevent intentional or incidental public access. Exclude this finding if this configuration is set at the account level. Setting this field ensures bucket access is limited to AWS service principals and authorized users. Exclude this finding if this configuration is set at the account level
   bucket = "km-public-blob"
 }
 

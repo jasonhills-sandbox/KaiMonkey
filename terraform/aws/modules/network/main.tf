@@ -7,6 +7,7 @@ resource "aws_vpc" "km_vpc" {
   enable_dns_hostnames = true
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_vpc.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_vpc_${var.environment}"
   })
 }
@@ -34,6 +35,7 @@ resource "aws_subnet" "km_private_subnet" {
   vpc_id            = aws_vpc.km_vpc.id
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_private_subnet_${var.environment}"
   })
 }
@@ -44,9 +46,10 @@ resource "aws_subnet" "km_public_subnet" {
   cidr_block              = cidrsubnet(aws_vpc.km_vpc.cidr_block, 8, var.az_count + count.index)
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   vpc_id                  = aws_vpc.km_vpc.id
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_public_subnet_${var.environment}"
   })
 }
@@ -84,6 +87,7 @@ resource "aws_route_table" "km_route_table" {
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_route_table.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_route_table_${var.environment}"
   })
 }
@@ -146,14 +150,17 @@ resource "aws_security_group" "km_ecs_sg" {
     from_port   = 0
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
+  # Drata: Ensure that [aws_security_group.egress.cidr_blocks] is explicitly defined and narrowly scoped to only allow traffic to trusted sources
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_sg_${var.environment}"
   })
 }
 
 resource "aws_lb" "km_lb" {
+  # Drata: Set [aws_lb.tags] to ensure that organization-wide tagging conventions are followed.
   name            = "km-lb-${var.environment}"
   subnets         = aws_subnet.km_public_subnet.*.id
   security_groups = [aws_security_group.km_alb_sg.id]
