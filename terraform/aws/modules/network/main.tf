@@ -44,7 +44,7 @@ resource "aws_subnet" "km_public_subnet" {
   cidr_block              = cidrsubnet(aws_vpc.km_vpc.cidr_block, 8, var.az_count + count.index)
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   vpc_id                  = aws_vpc.km_vpc.id
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = merge(var.default_tags, {
     # Drata: Set [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
