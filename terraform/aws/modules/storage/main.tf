@@ -38,6 +38,7 @@ resource "aws_kms_key" "km_db_kms_key" {
   enable_key_rotation     = true
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_kms_key.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_db_kms_key_${var.environment}"
   })
 }
