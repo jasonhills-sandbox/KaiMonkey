@@ -154,6 +154,7 @@ resource "aws_security_group" "km_ecs_sg" {
 }
 
 resource "aws_lb" "km_lb" {
+  # Drata: Set [aws_lb.tags] to ensure that organization-wide tagging conventions are followed.
   name            = "km-lb-${var.environment}"
   subnets         = aws_subnet.km_public_subnet.*.id
   security_groups = [aws_security_group.km_alb_sg.id]
