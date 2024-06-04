@@ -47,6 +47,7 @@ resource "aws_subnet" "km_public_subnet" {
   map_public_ip_on_launch = true
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_public_subnet_${var.environment}"
   })
 }
