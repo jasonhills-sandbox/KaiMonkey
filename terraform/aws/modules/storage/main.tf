@@ -110,6 +110,7 @@ resource "aws_s3_bucket" "km_blob_storage" {
 }
 
 resource "aws_s3_bucket" "km_public_blob" {
+  # Drata: Set [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
   bucket = "km-public-blob"
 }
 
