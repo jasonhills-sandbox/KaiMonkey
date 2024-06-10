@@ -127,6 +127,7 @@ resource "aws_instance" "km_vm"{
   vpc_security_group_ids = [ var.elb_sg ]
   subnet_id = var.public_subnet[0]
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_instance.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_vm_${var.environment}"
   })
 }
