@@ -7,6 +7,7 @@ resource "aws_vpc" "km_vpc" {
   enable_dns_hostnames = true
 
   tags = merge(var.default_tags, {
+    # Drata: Set [aws_vpc.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_vpc_${var.environment}"
   })
 }
