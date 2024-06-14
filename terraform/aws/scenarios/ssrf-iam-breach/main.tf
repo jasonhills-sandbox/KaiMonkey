@@ -109,6 +109,7 @@ resource "aws_iam_policy" "privileged-instance-policy" {
   name        = "privileged-instance-policy"
   description = "Provides full access to AWS services and resources."
   policy      = <<POLICY
+  # Drata: Explicitly define actions for [aws_iam_policy.policy] in adherence with the principal of least privilege. Avoid the use of overly permissive allow-all access patterns such as (*)
 {
     "Version": "2012-10-17",
     "Statement": [
