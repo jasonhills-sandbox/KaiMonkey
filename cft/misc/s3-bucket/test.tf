@@ -1,4 +1,5 @@
 resource "aws_s3_bucket" "mybucket" {
+  # Drata: Set [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
   bucket = "mybucket"
   acl = "public"
 
