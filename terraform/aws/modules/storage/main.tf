@@ -110,6 +110,7 @@ resource "aws_s3_bucket" "km_blob_storage" {
 }
 
 resource "aws_s3_bucket" "km_public_blob" {
+  # Drata: Set [aws_s3_bucket_public_access_block.ignore_public_acls] to true to prevent intentional or incidental public access
   bucket = "km-public-blob"
 }
 
