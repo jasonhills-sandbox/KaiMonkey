@@ -74,6 +74,7 @@ resource "aws_ecs_cluster" "km_ecs_cluster" {
   name = "km_ecs_cluster-${var.environment}"
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_ecs_cluster.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_cluster_${var.environment}"
   })
 }
