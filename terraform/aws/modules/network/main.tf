@@ -149,6 +149,7 @@ resource "aws_security_group" "km_ecs_sg" {
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_sg_${var.environment}"
   })
 }
