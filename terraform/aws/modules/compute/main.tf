@@ -109,6 +109,7 @@ resource "aws_ecs_service" "km_ecs_service" {
     security_groups  = [ var.elb_sg ]
   }
   tags = merge(var.default_tags, {
+  # Drata: Configure [aws_ecs_service.tags] to ensure that organization-wide tagging conventions are followed.
   })
 }
 
