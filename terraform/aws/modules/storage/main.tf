@@ -105,6 +105,7 @@ resource "aws_s3_bucket" "km_blob_storage" {
   bucket = "km-blob-storage-${var.environment}"
   acl    = "private"
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
     name = "km_blob_storage_${var.environment}"
   })
 }
