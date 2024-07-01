@@ -27,6 +27,7 @@ resource "aws_iam_role" "km_ecs_task_execution_role" {
 EOF
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_iam_role.tags] to ensure that organization-wide tagging conventions are followed.
     name        = "km_ecs_task_execution_role_${var.environment}"
   })
 }
