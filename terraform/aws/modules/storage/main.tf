@@ -116,6 +116,6 @@ resource "aws_s3_bucket" "km_public_blob" {
 resource "aws_s3_bucket_public_access_block" "km_public_blob" {
   bucket = aws_s3_bucket.km_public_blob.id
 
-  block_public_acls   = false
+  block_public_acls   = true
   block_public_policy = true
 }
