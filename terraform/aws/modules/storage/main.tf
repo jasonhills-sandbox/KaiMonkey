@@ -12,6 +12,7 @@ resource "aws_security_group" "km_rds_sg" {
   vpc_id = var.vpc_id
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_sg_${var.environment}"
   })
 
