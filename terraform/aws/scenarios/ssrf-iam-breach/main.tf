@@ -223,6 +223,7 @@ resource "aws_route_table_association" "subnet-2-association" {
 
 #Security Groups
 resource "aws_security_group" "web-app-security-group" {
+  # Drata: Configure [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
   description = "Allow SSH connection"
 
   egress {
