@@ -34,6 +34,7 @@ resource "aws_subnet" "km_private_subnet" {
   vpc_id            = aws_vpc.km_vpc.id
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_private_subnet_${var.environment}"
   })
 }
