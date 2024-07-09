@@ -58,6 +58,7 @@ resource "aws_iam_policy" "web-app-instance-policy" {
   name        = "web-instance-policy"
   description = "Provides full access to Amazon EC2 via the AWS Management Console"
   policy      = <<POLICY
+  # Drata: Explicitly define resources for [aws_iam_policy.policy] in adherence with the principal of least privilege. Avoid the use of overly permissive allow-all access patterns such as ([*])
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -109,6 +110,8 @@ resource "aws_iam_policy" "privileged-instance-policy" {
   name        = "privileged-instance-policy"
   description = "Provides full access to AWS services and resources."
   policy      = <<POLICY
+  # Drata: Explicitly define resources for [aws_iam_policy.policy] in adherence with the principal of least privilege. Avoid the use of overly permissive allow-all access patterns such as ([*])
+  # Drata: Explicitly define actions for [aws_iam_policy.policy] in adherence with the principal of least privilege. Avoid the use of overly permissive allow-all access patterns such as (*)
 {
     "Version": "2012-10-17",
     "Statement": [
