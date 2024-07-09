@@ -27,6 +27,7 @@ resource "aws_iam_role" "km_ecs_task_execution_role" {
 EOF
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_iam_role.tags] to ensure that organization-wide tagging conventions are followed.
     name        = "km_ecs_task_execution_role_${var.environment}"
   })
 }
@@ -74,6 +75,7 @@ resource "aws_ecs_cluster" "km_ecs_cluster" {
   name = "km_ecs_cluster-${var.environment}"
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_ecs_cluster.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_cluster_${var.environment}"
   })
 }
@@ -87,6 +89,7 @@ resource "aws_ecs_task_definition" "km_ecs_task" {
   memory                   = 1024
   execution_role_arn       = aws_iam_role.km_ecs_task_execution_role.arn
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_ecs_task_definition.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_task_${var.environment}"
   })
 }
@@ -109,6 +112,7 @@ resource "aws_ecs_service" "km_ecs_service" {
     security_groups  = [ var.elb_sg ]
   }
   tags = merge(var.default_tags, {
+  # Drata: Configure [aws_ecs_service.tags] to ensure that organization-wide tagging conventions are followed.
   })
 }
 
@@ -127,6 +131,7 @@ resource "aws_instance" "km_vm"{
   vpc_security_group_ids = [ var.elb_sg ]
   subnet_id = var.public_subnet[0]
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_instance.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_vm_${var.environment}"
   })
 }

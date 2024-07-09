@@ -3,6 +3,7 @@ resource "aws_db_subnet_group" "km_rds_subnet_grp" {
   subnet_ids = var.private_subnet
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_db_subnet_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_subnet_grp_${var.environment}"
   })
 }
@@ -12,6 +13,7 @@ resource "aws_security_group" "km_rds_sg" {
   vpc_id = var.vpc_id
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_rds_sg_${var.environment}"
   })
 
@@ -38,6 +40,7 @@ resource "aws_kms_key" "km_db_kms_key" {
   enable_key_rotation     = true
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_kms_key.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_db_kms_key_${var.environment}"
   })
 }
@@ -105,11 +108,13 @@ resource "aws_s3_bucket" "km_blob_storage" {
   bucket = "km-blob-storage-${var.environment}"
   acl    = "private"
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
     name = "km_blob_storage_${var.environment}"
   })
 }
 
 resource "aws_s3_bucket" "km_public_blob" {
+  # Drata: Configure [aws_s3_bucket.tags] to ensure that organization-wide tagging conventions are followed.
   bucket = "km-public-blob"
 }
 

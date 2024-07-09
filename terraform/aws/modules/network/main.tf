@@ -7,6 +7,7 @@ resource "aws_vpc" "km_vpc" {
   enable_dns_hostnames = true
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_vpc.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_vpc_${var.environment}"
   })
 }
@@ -34,6 +35,7 @@ resource "aws_subnet" "km_private_subnet" {
   vpc_id            = aws_vpc.km_vpc.id
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_private_subnet_${var.environment}"
   })
 }
@@ -47,6 +49,7 @@ resource "aws_subnet" "km_public_subnet" {
   map_public_ip_on_launch = true
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_subnet.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_public_subnet_${var.environment}"
   })
 }
@@ -84,6 +87,7 @@ resource "aws_route_table" "km_route_table" {
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_route_table.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_route_table_${var.environment}"
   })
 }
@@ -149,11 +153,13 @@ resource "aws_security_group" "km_ecs_sg" {
   }
 
   tags = merge(var.default_tags, {
+    # Drata: Configure [aws_security_group.tags] to ensure that organization-wide tagging conventions are followed.
     Name = "km_ecs_sg_${var.environment}"
   })
 }
 
 resource "aws_lb" "km_lb" {
+  # Drata: Configure [aws_lb.tags] to ensure that organization-wide tagging conventions are followed.
   name            = "km-lb-${var.environment}"
   subnets         = aws_subnet.km_public_subnet.*.id
   security_groups = [aws_security_group.km_alb_sg.id]
